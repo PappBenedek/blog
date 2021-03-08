@@ -1,10 +1,14 @@
 package com.blog.myblog.domain;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Component
 @Entity(name = "blogUsers")
 public class User {
     @GeneratedValue
@@ -33,7 +37,7 @@ public class User {
     public void setId(long id) { this.id = id; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-    public String getPassword() { return password; }
+    public  String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
     public void setPosts(List<Post> posts) { this.posts = posts; }
     public List<Post> getPosts() { return posts; }
