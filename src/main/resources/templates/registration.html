@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<div th:replace="fragments/myheader :: header"><div/>
+<body>
+<div class="container">
+    <div class="card-columns d-flex justify-content-center">
+        <div class="card">
+            <div class="card-block">
+                <form name="login" th:action="@{/reg}" method="post" th:object="${user}" class="form-signin">
+                    <h2 class="form-signin-heading">Regisztráció</h2>
+                    <label for="username" class="sr-only">Email</label>
+                    <input type="text" id="username" name="username" th:field="*{email}" class="form-control" placeholder="example@example.com" required="true" />
+                    <label for="password" class="sr-only">Jelszó</label>
+                    <input type="password" id="password" name="password" th:field="*{password}" class="form-control" placeholder="password" required="true" />
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Regisztráció</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

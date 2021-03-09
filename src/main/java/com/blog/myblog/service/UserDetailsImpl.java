@@ -28,7 +28,6 @@ public class UserDetailsImpl implements UserDetails {
         Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         Set<Role> roles = user.getRoles();
         for (Role role : roles) {
-            System.out.println(role.getRole());
             authorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
         return authorities;

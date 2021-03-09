@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+<div th:replace="myheader :: header"></div>
+</head>
+<body>
+<div th:fragment="navbar" id="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/"><img th:src="@{/logo2.png}" /> MyBlog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/posts">Posts</a>
+                <div sec:authorize="isAuthenticated()">
+                    <a class="nav-item nav-link" href="/createpost">CreatePost</a> <!-- DONT FORGET TO ADD THE PATH -->
+                </div>
+                <div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- SAME HERE -->
+                    <a class="nav-item nav-link" href="/">Manage users</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="navbar-text navbar-right">
+            <div class="navbar-text navbar-right" sec:authorize="isAuthenticated()">
+                Üdvözlünk <span th:with="email=${#authentication.getPrincipal().getUsername()}"  th:text="${email}"></span>
+                <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+                    | <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Kijelentkezés</a>
+                </form>
+            </div>
+
+            <div sec:authorize="isAnonymous()">
+                <form th:action="@{/login}">
+                    <button type="submit" class="btn btn-dark">Bejelentkezés</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
