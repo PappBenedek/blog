@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/myheader :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/mynavbar :: navbar"></div>
+<div class="container">
+    <label th:text="${user.email}" class="flex-item"></label>
+    <div th:each="role : ${roles}" class="flex-item">
+        <label  class="flex-item" th:text="${role}"></label>
+    </div>
+</div>
+<div th:replace="fragments/myfooter :: footer"></div>
+</body>
+</html>

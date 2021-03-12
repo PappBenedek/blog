@@ -1,18 +1,26 @@
 body{
     min-height: 100vh;
     margin: 0;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
 }
-
-#nav{
-    display: inline-block;
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-item{
+    flex-basis: auto;
+}
+#nav, #nav1{
+    margin-bottom: 1%;
 }
 #git{
     text-decoration: none;
 }
 
 
-footer{
-    min-height:50px;
+#footer{
+    position: fixed;
+    bottom: 0;
+    min-height: 5%;
+    padding-top: 0.5%;
 }

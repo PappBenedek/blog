@@ -5,7 +5,7 @@
 </head>
 <body>
 <div th:fragment="navbar" id="nav">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-expand-sm navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="/"><img th:src="@{/logo2.png}" /> MyBlog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -15,12 +15,14 @@
                 <a class="nav-item nav-link" href="/">Home</a>
                 <a class="nav-item nav-link" href="/posts">Posts</a>
                 <div sec:authorize="isAuthenticated()">
-                    <a class="nav-item nav-link" href="/createpost">CreatePost</a> <!-- DONT FORGET TO ADD THE PATH -->
+                    <a class="nav-item nav-link" href="/createpost">CreatePost</a>
                 </div>
-                <div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- SAME HERE -->
-                    <a class="nav-item nav-link" href="/">Manage users</a>
+                <div sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-item nav-link" href="/mypost">ManageMyPosts</a>
                 </div>
-
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-item nav-link" href="/manageusers">Manage users</a>
+                </div>
             </div>
         </div>
         <div class="navbar-text navbar-right">
@@ -33,7 +35,7 @@
 
             <div sec:authorize="isAnonymous()">
                 <form th:action="@{/login}">
-                    <button type="submit" class="btn btn-dark">Bejelentkezés</button>
+                    <button type="submit" class="btn btn-dark me-5">Bejelentkezés</button>
                 </form>
             </div>
         </div>

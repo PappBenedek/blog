@@ -5,14 +5,17 @@
 </head>
 <body>
 <div th:replace="fragments/mynavbar :: navbar" ></div>
-
-<form name="login"  th:action="@{/createpost/} + ${#authentication.getPrincipal().getUsername()}" method="post" th:object="${post}">
-    <label for="title">Title</label>
-    <input type="text" id="title" name="title" th:field="*{title}" placeholder="Example Title" required="true" />
-    <label for="content" class="sr-only">Jelszó</label>
-    <input type="text" id="content" name="content" th:field="*{content}"  placeholder="Some rangom content" required="true" />
-    <button class="btn btn-dark" type="submit">Public post</button>
-</form>
+<div class="container">
+    <div class="d-felx d-flex-row justify-content-center bg-light rounded mt-4" >
+        <form name="createPost"  th:action="@{/createpost/} + ${#authentication.getPrincipal().getUsername()}" method="post" th:object="${post}">
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" th:field="*{title}" placeholder="Example Title" required="true" /><br>
+            <label for="content" class="sr-only">Content</label><br>
+            <textarea type="text" id="content" name="content" th:field="*{content}"  placeholder="Some rangom content" required="true" ></textarea><br>
+            <button class="btn btn-dark" type="submit">Public post</button>
+        </form>
+    </div>
+</div>
 <div th:replace="fragments/myfooter :: footer"></div>
 </body>
 </html>

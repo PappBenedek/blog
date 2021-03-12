@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<div th:replace="fragments/myheader :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/mynavbar :: navbar"></div>
+<div class="container">
+    <div class="from-control">
+        <select class="form-control selectpicker" id="users">
+            <option value="">No one selected</option>
+            <option th:each="user: ${users}" th:value="${user.email}" th:text="${user.email}"></option>
+        </select>
+        <button class="btn btn-dark align-items-center" onclick="redirectToSpecificUser()">Manage User</button>
+    </div>
+    <script>
+        function redirectToSpecificUser(){
+            let user = document.getElementById("users");
+            window.location.href = `/manageusers/${user.selectedOptions[0].value}/`;
+        }
+    </script>
+</div>
+<div th:replace="fragments/myfooter :: footer"></div>
+</body>
+</html>

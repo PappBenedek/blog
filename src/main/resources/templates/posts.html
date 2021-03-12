@@ -10,16 +10,36 @@
 <body>
 <div th:replace="fragments/mynavbar :: navbar"></div>
 <div class="container">
-        <article th:each="post : ${posts}">
+    <div class="justify-content-center flex-item">
+        <form>
+            <label>Search by:</label>
+            <select class="form-select" name="search" id="search">
+                <option value="title" >Title</option>
+                <option value="user" >Author</option>
+            </select>
+            <input type="text" placeholder="Search for..." id="value">
+            <input class="btn btn-dark" value="Search!" onclick="redirectToSearch()">
+            <!-- Js script tp redirect to the correct path -->
+            <script>
+                function redirectToSearch(){
+                    let search = document.getElementById("search");
+                    let value = document.getElementById("value").value;
+                    window.location.href = `/posts/${search.selectedOptions[0].value}/${value}`;
+                }
+            </script>
+        </form>
+        <article th:each="post : ${posts}" class="bg-light rounded flex-item">
             <header>
-                <h1 th:text="${post.title}" >Cím</h1>
-                <p th:text="'Posted on' + ${post.date}" ></p>
+                <h2 th:text="${post.title}" >Cím</h2>
+                <h6 th:text="${post.date == null} ? '' : 'Posted on: ' + ${#dates.format(post.date, 'YY/MMM/dd')}" class="text-muted" ></h6>
             </header>
             <section>
                 <p th:text="${post.content}" ></p>
             </section>
+            <h6 th:text="'By: ' + ${post.user.email}" class="text-muted" ></h6>
         </article>
-    <div th:replace="fragments/myfooter :: footer"></div>
+    </div>
 </div>
+<div th:replace="fragments/myfooter :: footer"></div>
 </body>
 </html>

@@ -24,6 +24,26 @@ public class PostController {
         return "posts";
     }
 
+    @GetMapping("posts/{searchBy}/{value}")
+    public String getFilteredPosts(@PathVariable String searchBy, @PathVariable String value ,Model model){
+        List<Post> posts;
+        if(searchBy.equals("title")){
+            posts = postService.getPostsByTitle(value);
+        }else{
+            posts = postService.getPostsByAuthot(value);
+        }
+        model.addAttribute("posts",posts);
+        System.out.println(posts);
+        return "posts";
+    }
+
+    @GetMapping("posts/{searchby}")
+    public String getFilteredPosts(Model model){
+        List<Post> posts = postService.getAllPost();
+        model.addAttribute("posts",posts);
+        return "posts";
+    }
+
     @GetMapping("/createpost")
     public String getCreatePost(Model model){
         model.addAttribute("post",new Post());

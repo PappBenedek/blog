@@ -26,6 +26,16 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public List<Post> getPostsByTitle(String title){
+        return postRepository.findByTitleContains(title);
+    }
+
+    public List<Post> getPostsByAuthot(String authot){
+        User user = userRepository.findByEmail(authot);
+        List<Post> posts = postRepository.findAllByUser(user.getId());
+        return posts;
+    }
+
     public void savePost(Post post, String email){
         User user = userRepository.findByEmail(email);
         post.setUser(user);
